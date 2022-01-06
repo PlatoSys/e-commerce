@@ -19,7 +19,7 @@ import Message from "../components/Message";
 function ProductScreen() {
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
-  const match = useMatch("/product/:id");
+  const match = useMatch("/products/:id");
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productDetails);
   const { error, loading, product } = productList;

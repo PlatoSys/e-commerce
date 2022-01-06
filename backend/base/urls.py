@@ -4,5 +4,5 @@ from .views import getProduct, getProducts, getRoutes
 urlpatterns = [
     path('', getRoutes, name= 'routes'),
     path('products/', getProducts, name='products'),
-    path('product/<str:pk>', getProduct, name='product')
+    path('products/<str:pk>', getProduct, name='product')
 ]

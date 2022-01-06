@@ -9,11 +9,11 @@ function Product({ product }) {
     <Col sm={12} md={6} lg={4} xl={3}>
       <Card className="my-3 p-3 rounded">
         Product
-        <Link to={`/product/${product._id}`}>
+        <Link to={`/products/${product._id}`}>
           <Card.Img src={product.image} />
         </Link>
         <Card.Body>
-          <Link to={`/product/${product._id}`}>
+          <Link to={`/products/${product._id}`}>
             <Card.Title as="div">
               <strong>{product.name}</strong>
             </Card.Title>
