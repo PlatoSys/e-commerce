@@ -7,6 +7,7 @@ import "./bootstrap.min.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route path=":id" element={<CartScreen />} />
               <Route path="" element={<CartScreen />} />
             </Route>
+            <Route path="/login" element={<LoginScreen />} />
           </Routes>
         </Container>
       </main>
