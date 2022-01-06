@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
-import {USER_UPDATE_PROFILE_RESET} from "../constants/userConstants";
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 import Loader from "../components/Loader";
 
 function ProfileScreen() {
@@ -42,9 +42,9 @@ function ProfileScreen() {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-    setMessage("")
-    setPassword("")
-    setConfirmPassword("");
+      setMessage("");
+      setPassword("");
+      setConfirmPassword("");
       dispatch(
         updateUserProfile({
           id: user._id,
@@ -58,8 +58,8 @@ function ProfileScreen() {
 
   return (
     <Row>
-        {loading && <Loader />}
-        {error && <Message variant="danger">{error}</Message>}
+      {loading && <Loader />}
+      {error && <Message variant="danger">{error}</Message>}
 
       <Col md={3}>
         <h2>User Profile</h2>

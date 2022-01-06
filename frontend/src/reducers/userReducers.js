@@ -30,16 +30,16 @@ export const userLoginReducer = (state = {}, action) => {
   }
 };
 
-export const userDetailsReducer = (state = {user: {}}, action) => {
+export const userDetailsReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case actionTypes.USER_DETAILS_REQUEST:
-      return {...state, loading: true };
+      return { ...state, loading: true };
     case actionTypes.USER_DETAILS_SUCCESS:
       return { loading: false, user: action.payload };
     case actionTypes.USER_DETAILS_FAILED:
       return { loading: false, error: action.payload };
     case actionTypes.USER_DETAILS_RESET:
-      return { user: {}}
+      return { user: {} };
     default:
       return state;
   }
@@ -54,7 +54,7 @@ export const userUpdateProfileReducer = (state = {}, action) => {
     case actionTypes.USER_UPDATE_PROFILE_FAILED:
       return { loading: false, error: action.payload };
     case actionTypes.USER_UPDATE_PROFILE_RESET:
-      return {}
+      return {};
     default:
       return state;
   }

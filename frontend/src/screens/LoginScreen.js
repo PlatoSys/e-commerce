@@ -33,10 +33,9 @@ function LoginScreen() {
 
   return (
     <FormContainer>
-      {loading & <Loader />}
-
       <h1>Sign In</h1>
       {error && <Message variant="danger">{error}</Message>}
+      {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email" className="my-2">
           <Form.Label>Email Address</Form.Label>
