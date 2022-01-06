@@ -1,5 +1,5 @@
 from django.urls import path
-from base.views.user_views import getUserProfile, getUsers, registerUser, MyTokenObtainPairView
+from base.views.user_views import getUserProfile, getUsers, registerUser, updateUserProfile, MyTokenObtainPairView
 from base.views.product_views import getProduct, getProducts
 
 urlpatterns = [
@@ -13,5 +13,6 @@ urlpatterns = [
         name='token_obtain_pair'),
     path('users/profile', getUserProfile, name='users-profile'),
     path('users/', getUsers, name='users'),
+    path('users/profile/update/', updateUserProfile, name='user-profile-update')
 
 ]
