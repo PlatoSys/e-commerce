@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { saveShippingAddress } from "../actions/cartActions";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { useNavigate } from "react-router-dom";
 
 function ShippingScreen() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-  console.log(cart.shippingAddress);
-  console.log("adr", shippingAddress);
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [country, setCountry] = useState(shippingAddress.country);
@@ -26,6 +26,7 @@ function ShippingScreen() {
         postalCode,
       })
     );
+    navigate("/payment");
   };
 
   return (
