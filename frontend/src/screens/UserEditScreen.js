@@ -12,11 +12,11 @@ function UserEditScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const match = useMatch("/admin/user/:id/edit");
+  const userId = match.params.id;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-  const userId = match.params.id;
 
   const userDetails = useSelector((state) => state.userDetails);
   const { user, error, loading } = userDetails;
