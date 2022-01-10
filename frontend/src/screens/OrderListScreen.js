@@ -67,7 +67,7 @@ function OrderListScreen() {
 
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <button variant="warning" className="btn btn-sm">
+                    <button variant="primary" className="btn danger">
                       Details
                     </button>
                   </LinkContainer>

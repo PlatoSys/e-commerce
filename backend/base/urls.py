@@ -1,5 +1,5 @@
 from django.urls import path
-from base.views.order_views import getOrders, addOrderItems, getMyOrders, getOrderById, updateOrderToPaid
+from base.views.order_views import getOrders, updateOrderToDelivered, addOrderItems, getMyOrders, getOrderById, updateOrderToPaid
 from base.views.user_views import updateUser, getUserById, deleteUser, getUserProfile, getUsers, registerUser, updateUserProfile, MyTokenObtainPairView
 from base.views.product_views import uploadImage, updateProduct, createProduct, getProduct, getProducts, deleteProduct
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('orders/', getOrders, name='orders'),
     path('orders/add/', addOrderItems, name='orders-add'),
     path('orders/myorders/', getMyOrders, name='myorders'),
+    path('orders/<str:pk>/deliver/', updateOrderToDelivered, name='user-order'),
     path('orders/<str:pk>/', getOrderById, name='user-order'),
     path('orders/<str:pk>/pay/', updateOrderToPaid, name='pay'),
 ]
