@@ -22,7 +22,7 @@ function CartScreen() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const navigate = useNavigate();
-
+  console.log(cartItems);
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
