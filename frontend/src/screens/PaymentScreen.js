@@ -22,7 +22,6 @@ function PaymentScreen() {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
-    console.log("handled");
   };
 
   return (

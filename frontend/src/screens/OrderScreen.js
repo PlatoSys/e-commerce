@@ -1,60 +1,60 @@
-import React, { useEffect, useState } from "react"
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { getOrderDetails, payOrder } from "../actions/orderActions"
-import { useMatch } from "react-router-dom"
-import { PayPalButton } from "react-paypal-button-v2"
-import { ORDER_PAY_RESET } from "../constants/orderConstants"
+import React, { useEffect, useState } from "react";
+import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+import { getOrderDetails, payOrder } from "../actions/orderActions";
+import { useMatch } from "react-router-dom";
+import { PayPalButton } from "react-paypal-button-v2";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
 function OrderScreen() {
-  const dispatch = useDispatch()
-  const match = useMatch("/order/:id")
-  const orderId = match.params.id
+  const dispatch = useDispatch();
+  const match = useMatch("/order/:id");
+  const orderId = match.params.id;
 
-  const orderDetails = useSelector((state) => state.orderDetails)
-  const { order, error, loading } = orderDetails
-  const orderPay = useSelector((state) => state.orderPay)
-  const { success: successPay, loading: loadingPay } = orderPay
+  const orderDetails = useSelector((state) => state.orderDetails);
+  const { order, error, loading } = orderDetails;
+  const orderPay = useSelector((state) => state.orderPay);
+  const { success: successPay, loading: loadingPay } = orderPay;
 
-  const [sdkReady, setSdkReady] = useState(false)
+  const [sdkReady, setSdkReady] = useState(false);
 
   if (!loading && !error) {
     order.itemsPrice = order.orderItems
       .reduce((acc, item) => acc + item.price * item.qty, 0)
-      .toFixed(2)
+      .toFixed(2);
   }
 
   const addPaypalScript = () => {
-    const script = document.createElement("script")
-    script.type = "text/javascript"
+    const script = document.createElement("script");
+    script.type = "text/javascript";
     script.src =
-      "https://www.paypal.com/sdk/js?client-id=AfAgq2GGlsSfZwF49lx4oiJ7T2Mwe-nO4hYh6fkjCfykFtdWErixlr5BNE_wjOp_BLT7jBSZCi3B8i2u"
-    script.async = true
+      "https://www.paypal.com/sdk/js?client-id=AfAgq2GGlsSfZwF49lx4oiJ7T2Mwe-nO4hYh6fkjCfykFtdWErixlr5BNE_wjOp_BLT7jBSZCi3B8i2u";
+    script.async = true;
     script.onload = () => {
-      setSdkReady(true)
-    }
-    document.body.appendChild(script)
-  }
+      setSdkReady(true);
+    };
+    document.body.appendChild(script);
+  };
 
   useEffect(() => {
     if (!order || successPay || order._id !== Number(orderId)) {
-      dispatch({ type: ORDER_PAY_RESET })
-      dispatch(getOrderDetails(orderId))
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
-        addPaypalScript()
+        addPaypalScript();
       } else {
-        setSdkReady(true)
+        setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, successPay])
+  }, [dispatch, order, orderId, successPay]);
 
   const successPaymentHandler = (paymentResult) => {
-    dispatch(payOrder(orderId, paymentResult))
-  }
+    dispatch(payOrder(orderId, paymentResult));
+  };
 
   return loading ? (
     <Loader />
@@ -197,7 +197,7 @@ function OrderScreen() {
         </Col>
       </Row>
     </div>
-  )
+  );
 }
 
-export default OrderScreen
+export default OrderScreen;

@@ -22,7 +22,7 @@ function CartScreen() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const navigate = useNavigate();
-  console.log(cartItems);
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
@@ -34,7 +34,7 @@ function CartScreen() {
   };
 
   const checkoutHandler = () => {
-    // navigate(`/login/?redirect=shipping`);
+    // navigate(`/login/?redirect=shipping`)
     navigate(`/shipping`);
   };
 
@@ -66,7 +66,6 @@ function CartScreen() {
                         dispatch(addToCart(item.product, e.target.value))
                       }
                     >
-                      {console.log(item)}
                       {[...Array(item.countInStock).keys()].map((x) => (
                         <option key={x + 1}>{x + 1}</option>
                       ))}

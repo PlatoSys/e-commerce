@@ -1,37 +1,37 @@
-import * as actionTypes from "../constants/orderConstants"
-import axios from "axios"
-import { CART_CLEAR_ITEMS } from "../constants/cartConstants"
+import * as actionTypes from "../constants/orderConstants";
+import axios from "axios";
+import { CART_CLEAR_ITEMS } from "../constants/cartConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
       type: actionTypes.ORDER_CREATE_REQUEST,
-    })
+    });
 
     const {
       userLogin: { userInfo },
-    } = getState()
+    } = getState();
 
     const config = {
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
-    }
+    };
 
-    const { data } = await axios.post(`/api/orders/add/`, order, config)
+    const { data } = await axios.post(`/api/orders/add/`, order, config);
 
     dispatch({
       type: actionTypes.ORDER_CREATE_SUCCESS,
       payload: data,
-    })
+    });
 
     dispatch({
       type: CART_CLEAR_ITEMS,
       payload: data,
-    })
+    });
 
-    localStorage.removeItem("cartItems")
+    localStorage.removeItem("cartItems");
   } catch (error) {
     dispatch({
       type: actionTypes.ORDER_CREATE_FAIL,
@@ -39,33 +39,33 @@ export const createOrder = (order) => async (dispatch, getState) => {
         error.response && error.response.data.detail
           ? error.response.data.detail
           : error.message,
-    })
+    });
   }
-}
+};
 
 export const getOrderDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: actionTypes.ORDER_DETAILS_REQUETS,
-    })
+    });
 
     const {
       userLogin: { userInfo },
-    } = getState()
+    } = getState();
 
     const config = {
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
-    }
+    };
 
-    const { data } = await axios.get(`/api/orders/${id}/`, config)
+    const { data } = await axios.get(`/api/orders/${id}/`, config);
 
     dispatch({
       type: actionTypes.ORDER_DETAILS_SUCCESS,
       payload: data,
-    })
+    });
   } catch (error) {
     dispatch({
       type: actionTypes.ORDER_DETAILS_FAIL,
@@ -73,37 +73,37 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         error.response && error.response.data.detail
           ? error.response.data.detail
           : error.message,
-    })
+    });
   }
-}
+};
 
 export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
   try {
     dispatch({
       type: actionTypes.ORDER_PAY_REQUEST,
-    })
+    });
 
     const {
       userLogin: { userInfo },
-    } = getState()
+    } = getState();
 
     const config = {
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
-    }
+    };
 
     const { data } = await axios.put(
       `/api/orders/${id}/pay/`,
       paymentResult,
       config
-    )
+    );
 
     dispatch({
       type: actionTypes.ORDER_PAY_SUCCESS,
       payload: data,
-    })
+    });
   } catch (error) {
     dispatch({
       type: actionTypes.ORDER_PAY_FAIL,
@@ -111,33 +111,33 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
         error.response && error.response.data.detail
           ? error.response.data.detail
           : error.message,
-    })
+    });
   }
-}
+};
 
 export const listMyOrders = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: actionTypes.ORDER_LIST_MY_REQUEST,
-    })
+    });
 
     const {
       userLogin: { userInfo },
-    } = getState()
+    } = getState();
 
     const config = {
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
-    }
+    };
 
-    const { data } = await axios.get(`/api/orders/myorders/`, config)
+    const { data } = await axios.get(`/api/orders/myorders/`, config);
 
     dispatch({
       type: actionTypes.ORDER_LIST_MY_SUCCESS,
       payload: data,
-    })
+    });
   } catch (error) {
     dispatch({
       type: actionTypes.ORDER_LIST_MY_FAIL,
@@ -145,6 +145,6 @@ export const listMyOrders = () => async (dispatch, getState) => {
         error.response && error.response.data.detail
           ? error.response.data.detail
           : error.message,
-    })
+    });
   }
-}
+};
