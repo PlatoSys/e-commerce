@@ -4,7 +4,7 @@ import { Button, Table } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
-import { listUsers } from "../actions/userActions";
+import { deleteUser, listUsers } from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
 
 function UserListScreen() {
@@ -12,7 +12,8 @@ function UserListScreen() {
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
   const { userInfo } = useSelector((state) => state.userLogin);
-
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,11 +22,14 @@ function UserListScreen() {
     } else {
       navigate(`/`);
     }
-  }, [dispatch, navigate, userInfo]);
+  }, [dispatch, navigate, userInfo, successDelete]);
 
   const deleteHandler = (id) => {
-    console.log("delet", id);
+    if (window.confirm("You want to delete user?")) {
+      dispatch(deleteUser(id));
+    }
   };
+
   return (
     <div>
       <h1>Uers</h1>
@@ -58,7 +62,7 @@ function UserListScreen() {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/user/${user._id}`}>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <button variant="warning" className="btn btn-sm">
                       <i className="fas fa-edit" style={{ color: "black" }}></i>
                     </button>
