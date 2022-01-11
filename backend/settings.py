@@ -133,7 +133,7 @@ DATABASES = {
         'PASSWORD': "216325180b42d7def037788580265b12db46a1b44ba9f110500b5f72de6e31bf",
         'HOST': "ec2-34-230-198-12.compute-1.amazonaws.com",
         'PORT': '5432',
-        'DATABASE_URL': os.environ.get("DB_URI")
+        'DATABASE_URL': "postgres://mmtwjortlvvjsx:216325180b42d7def037788580265b12db46a1b44ba9f110500b5f72de6e31bf@ec2-34-230-198-12.compute-1.amazonaws.com:5432/del0g3nqa08vqh"
     }
 }
 
