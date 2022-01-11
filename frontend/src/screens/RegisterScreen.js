@@ -40,7 +40,7 @@ function RegisterScreen() {
 
   return (
     <FormContainer>
-      {loading & <Loader />}
+      {loading && <Loader />}
 
       <h1>Sign In</h1>
       {message && <Message variant="danger">{message}</Message>}
