@@ -44,10 +44,10 @@ function ProductScreen() {
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    if(successProductReview){
-      setRating(0)
+    if (successProductReview) {
+      setRating(0);
       setComment("");
-      dispatch({type: PRODUCT_CREATE_REVIEW_RESET})
+      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match.params.id, successProductReview, errorProductReview]);
@@ -58,10 +58,12 @@ function ProductScreen() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProductReview(match.params.id, {
-      rating,
-      comment
-    }))
+    dispatch(
+      createProductReview(match.params.id, {
+        rating,
+        comment,
+      })
+    );
   };
   return (
     <React.Fragment>
@@ -170,8 +172,12 @@ function ProductScreen() {
                 <ListGroup.Item>
                   <h4>Write a review</h4>
                   {loadingProductReview && <Loader />}
-                  {successProductReview && <Message variant='success'>Review Submitted</Message>}
-                  {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
+                  {successProductReview && (
+                    <Message variant="success">Review Submitted</Message>
+                  )}
+                  {errorProductReview && (
+                    <Message variant="danger">{errorProductReview}</Message>
+                  )}
 
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
@@ -202,10 +208,11 @@ function ProductScreen() {
                       </FormGroup>
 
                       <Button
-                      disabled={loadingProductReview}
-                      type='submit'
-                      className="my-3"
-                      variant='primary'>
+                        disabled={loadingProductReview}
+                        type="submit"
+                        className="my-3"
+                        variant="primary"
+                      >
                         Submit
                       </Button>
                     </Form>

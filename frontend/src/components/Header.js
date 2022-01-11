@@ -67,10 +67,8 @@ function Header() {
                 </NavDropdown>
               )}
             </Nav>
-
           </Navbar.Collapse>
           <SearchBox />
-
         </Container>
       </Navbar>
     </header>

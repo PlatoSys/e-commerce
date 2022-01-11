@@ -92,7 +92,7 @@ export const productReviewCreateReducer = (state = {}, action) => {
   }
 };
 
-export const productTopRatedReducer = (state = {products: []}, action) => {
+export const productTopRatedReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case actionType.PRODUCT_TOP_REQUEST:
       return { loading: true, products: [] };

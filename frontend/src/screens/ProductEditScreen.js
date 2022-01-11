@@ -89,10 +89,10 @@ function ProductEditScreen() {
         formData,
         config
       );
-      setImage(data)
-      setUploading(false)
+      setImage(data);
+      setUploading(false);
     } catch (ererrorr) {
-      setUploading(false)
+      setUploading(false);
     }
   };
 
@@ -142,7 +142,7 @@ function ProductEditScreen() {
                 <Form.Control
                   type="file"
                   placeholder="Enter Price"
-                  onChange={e => uploadFileHandler(e)}
+                  onChange={(e) => uploadFileHandler(e)}
                 />
               </Form.Group>
               {uploading && <Loader />}

@@ -117,7 +117,6 @@ export const orderListReducer = (state = { orders: [] }, action) => {
   }
 };
 
-
 export const orderDeliverReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.ORDER_DELIVER_REQUEST:

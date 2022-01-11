@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { useLocation  } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 
@@ -16,12 +16,10 @@ function HomeScreen() {
   const productList = useSelector((state) => state.productList);
   const { error, loading, products, page, pages } = productList;
 
-  let keyword = location.search
+  let keyword = location.search;
   useEffect(() => {
     dispatch(listProducts(keyword));
-
   }, [dispatch, keyword]);
-
 
   return (
     <div>
@@ -33,15 +31,13 @@ function HomeScreen() {
         <Message variant="danger">{error}</Message>
       ) : (
         <div>
-          
-        <Row lg={"2px"}>
-          {products.map((product) => (
-            <Product key={product._id} product={product} />
-          ))}
-        </Row>
-        <Paginate page={page} pages={pages} keyword={keyword} />
+          <Row lg={"2px"}>
+            {products.map((product) => (
+              <Product key={product._id} product={product} />
+            ))}
+          </Row>
+          <Paginate page={page} pages={pages} keyword={keyword} />
         </div>
-
       )}
     </div>
   );

@@ -30,8 +30,7 @@ function OrderScreen() {
   const { success: successPay, loading: loadingPay } = orderPay;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
-  const { success: successDelivered, loading: loadingDelivered } =
-  orderDeliver;
+  const { success: successDelivered, loading: loadingDelivered } = orderDeliver;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -57,8 +56,8 @@ function OrderScreen() {
   };
 
   useEffect(() => {
-    if(!userInfo){
-      navigate('/')
+    if (!userInfo) {
+      navigate("/");
     }
 
     if (

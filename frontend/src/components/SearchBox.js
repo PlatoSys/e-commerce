@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate, useLocation  } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function SearchBox() {
   const navigate = useNavigate();
@@ -10,22 +10,23 @@ function SearchBox() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if(keyword){
-        navigate(`/?keyword=${keyword}&page=1`)
+    if (keyword) {
+      navigate(`/?keyword=${keyword}&page=1`);
     } else {
-        navigate(location.pathname)
+      navigate(location.pathname);
     }
   };
 
   return (
-
     <Form onSubmit={submitHandler} className="d-flex">
       <Form.Control
         type="text"
         name="q"
         onChange={(e) => setKeyword(e.target.value)}
       ></Form.Control>
-      <Button type="submit" variant="outline-success" className="p-2 mx-2">Search</Button>
+      <Button type="submit" variant="outline-success" className="p-2 mx-2">
+        Search
+      </Button>
     </Form>
   );
 }
