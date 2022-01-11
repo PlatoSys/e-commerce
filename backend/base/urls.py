@@ -1,7 +1,7 @@
 from django.urls import path
 from base.views.order_views import getOrders, updateOrderToDelivered, addOrderItems, getMyOrders, getOrderById, updateOrderToPaid
 from base.views.user_views import updateUser, getUserById, deleteUser, getUserProfile, getUsers, registerUser, updateUserProfile, MyTokenObtainPairView
-from base.views.product_views import createProductReview, uploadImage, updateProduct, createProduct, getProduct, getProducts, deleteProduct
+from base.views.product_views import getTopProducts, createProductReview, uploadImage, updateProduct, createProduct, getProduct, getProducts, deleteProduct
 
 urlpatterns = [
     # products
@@ -10,7 +10,8 @@ urlpatterns = [
     path('products/upload/', uploadImage, name='upload-image'),
     path('products/delete/<str:pk>/', deleteProduct, name='delete-product'),
     path('products/update/<str:pk>/', updateProduct, name='product'),
-    path('products/<str:pk>/reviews/', createProductReview, name='product'),
+    path('products/top/', getTopProducts, name='top-products'),
+    path('products/<str:pk>/reviews/', createProductReview, name='product-reviews'),
     path('products/<str:pk>/', getProduct, name='product'),
 
     # users
