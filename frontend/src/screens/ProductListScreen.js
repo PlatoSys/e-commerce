@@ -5,15 +5,17 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts, deleteProduct, createProduct } from "../actions/productActions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+import Paginate from "../components/Paginate";
 
 function ProductListScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, pages, page } = productList;
 
   const productCreate = useSelector((state) => state.productCreate);
   const {
@@ -31,6 +33,7 @@ function ProductListScreen() {
   } = productDelete;
   const { userInfo } = useSelector((state) => state.userLogin);
 
+  let keyword = location.search
   useEffect(() => {
     dispatch({type: PRODUCT_CREATE_RESET})
     if (!userInfo.isAdmin) {
@@ -39,9 +42,9 @@ function ProductListScreen() {
     if(successCreate){
       navigate(`/admin/product/${createdProduct._id}/edit`);
     } else {
-      dispatch(listProducts())
+      dispatch(listProducts(keyword))
     }
-  }, [dispatch, navigate, userInfo, successDelete, successCreate ]);
+  }, [dispatch, navigate, userInfo, successDelete, successCreate, keyword ]);
 
   const deleteHandler = (id) => {
     if (window.confirm("You want to delete product?")) {
@@ -77,6 +80,8 @@ function ProductListScreen() {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
+        <div>
+
         <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
@@ -116,6 +121,8 @@ function ProductListScreen() {
             ))}
           </tbody>
         </Table>
+        <Paginate pages={pages} page={page} isAdmin={true} />
+        </div>
       )}
     </div>
   );

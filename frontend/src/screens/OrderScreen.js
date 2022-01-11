@@ -30,7 +30,6 @@ function OrderScreen() {
   const { success: successPay, loading: loadingPay } = orderPay;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
-  console.log(orderDeliver)
   const { success: successDelivered, loading: loadingDelivered } =
   orderDeliver;
 
