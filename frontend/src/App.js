@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import HomeScreen from "./screens/HomeScreen";
 import "./bootstrap.min.css";
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
