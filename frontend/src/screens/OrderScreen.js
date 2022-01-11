@@ -117,7 +117,7 @@ function OrderScreen() {
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message variant="success">Delivered on {order.paidAt}</Message>
+                <Message variant="success">Delivered on {order.deliveredAt.substring(0, 10)}</Message>
               ) : (
                 <Message variant="warning">Not Delivered</Message>
               )}
