@@ -52,7 +52,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/products/delete/${id}/`, config);
+    const { data } = await axios.delete(`/api/product/${id}/`, config);
 
     dispatch({
       type: actionTypes.PRODUCT_DELETE_SUCCESS,
@@ -86,7 +86,7 @@ export const createProduct = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/products/create/`, {}, config);
+    const { data } = await axios.post(`/api/product/${0}/`, {}, config);
 
     dispatch({
       type: actionTypes.PRODUCT_CREATE_SUCCESS,
@@ -121,7 +121,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/products/update/${product._id}/`,
+      `/api/product/${product._id}/`,
       product,
       config
     );

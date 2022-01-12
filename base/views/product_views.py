@@ -1,6 +1,7 @@
+from django.http.response import Http404
 from ..models import Product, Review
 from ..serializers import ProductSerializer
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -42,50 +43,6 @@ def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@api_view(['PUT'])
-@permission_classes([IsAdminUser])
-def updateProduct(request, pk):
-    data = request.data
-    product = Product.objects.get(_id=pk)
-
-    product.name = data['name']
-    product.price = data['price']
-    product.brand = data['brand']
-    product.countInStock = data['countInStock']
-    product.category = data['category']
-    product.description = data['description']
-    product.save()
-
-    serializer = ProductSerializer(product, many=False)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@api_view(['POST'])
-@permission_classes([IsAdminUser])
-def createProduct(request):
-    user = request.user
-    product = Product.objects.create(
-        user=user,
-        name='sample',
-        price=10,
-        brand='Brand',
-        countInStock=5,
-        category='Sample Category',
-        description='Desc'
-    )
-    serializer = ProductSerializer(product, many=False)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@api_view(['DELETE'])
-@permission_classes([IsAdminUser])
-def deleteProduct(request, pk):
-    product = Product.objects.get(_id=pk)
-    product.delete()
-    return Response({'detail': 'product was deleted'}, status=status.HTTP_200_OK)
-
 
 @api_view(['POST'])
 def uploadImage(request):
@@ -130,3 +87,51 @@ def createProductReview(request, pk):
         product.save()
 
         return Response({'detail': 'review Added'})
+
+@permission_classes([IsAdminUser])
+class AdminProductDetail(APIView):
+    """
+    Retrieve, update or delete a Product instance.
+    """
+
+    def get_object(self, pk):
+        try:
+            return Product.objects.get(pk=pk)
+        except Product.DoesNotExist:
+            raise Http404
+
+    def put(self, request, pk, format=None):
+        data = request.data
+        product = Product.objects.get(_id=pk)
+
+        product.name = data['name']
+        product.price = data['price']
+        product.brand = data['brand']
+        product.countInStock = data['countInStock']
+        product.category = data['category']
+        product.description = data['description']
+        product.save()
+
+        serializer = ProductSerializer(product, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def delete(self, request, pk, format=None):
+        product = Product.objects.get(_id=pk)
+        product.delete()
+        return Response({'detail': 'product was deleted'}, status=status.HTTP_200_OK)
+
+    
+    def post(self, request, pk):
+        user = request.user
+        product = Product.objects.create(
+            user=user,
+            name='sample',
+            price=10,
+            brand='Brand',
+            countInStock=5,
+            category='Sample Category',
+            description='Desc'
+        )
+        serializer = ProductSerializer(product, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
