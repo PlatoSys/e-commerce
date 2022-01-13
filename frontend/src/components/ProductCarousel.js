@@ -25,7 +25,16 @@ function ProductCarousel() {
       {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>
-            <Image src={product.image} alt={product.name} maxWidth={"150px"} minWidth={"150px"} minHeight={"150px"} maxHeight={"150px"} alt={product.name}  fluid />
+            <Image
+              src={product.image}
+              alt={product.name}
+              maxWidth={"150px"}
+              minWidth={"150px"}
+              minHeight={"150px"}
+              maxHeight={"150px"}
+              alt={product.name}
+              fluid
+            />
             <Carousel.Caption className="carousel.caption">
               <h4>
                 {product.name} ${product.price}
