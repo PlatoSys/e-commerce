@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 function OrderListScreen() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
   const { userInfo } = useSelector((state) => state.userLogin);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -24,7 +24,7 @@ function OrderListScreen() {
   }, [dispatch, navigate, userInfo]);
 
   return (
-    <div>
+    <React.Fragment>
       <h1>Orders</h1>
       {loading ? (
         <Loader />
@@ -77,7 +77,7 @@ function OrderListScreen() {
           </tbody>
         </Table>
       )}
-    </div>
+    </React.Fragment>
   );
 }
 

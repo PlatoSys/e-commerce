@@ -22,7 +22,8 @@ function HomeScreen() {
   }, [dispatch, keyword]);
 
   return (
-    <div>
+    <React.Suspense fallback={<Loader />}>
+      <React.Fragment>
       {!keyword && <ProductCarousel />}
       <h1>Latest Products</h1>
       {loading ? (
@@ -38,8 +39,8 @@ function HomeScreen() {
           </Row>
           <Paginate page={page} pages={pages} keyword={keyword} />
         </div>
-      )}
-    </div>
+      )}</React.Fragment>
+    </React.Suspense>
   );
 }
 

@@ -12,6 +12,7 @@ import { LinkContainer } from "react-router-bootstrap";
 function ProfileScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const userDetails = useSelector((state) => state.userDetails);
   const { user, error, loading } = userDetails;
   const userLogin = useSelector((state) => state.userLogin);
@@ -62,103 +63,108 @@ function ProfileScreen() {
   };
 
   return (
-    <Row>
-      {loading && <Loader />}
-      {error && <Message variant="danger">{error}</Message>}
+    <React.Fragment>
+      <Row>
+        {loading && <Loader />}
+        {error && <Message variant="danger">{error}</Message>}
 
-      <Col md={3}>
-        <h2>User Profile</h2>
-        {message && <Message variant="danger">{message}</Message>}
-        {/* {error && <Message variant="danger">{error}</Message>} */}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name" className="my-2">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="name"
-              placeholder="Enter Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+        <Col md={3}>
+          <h2>User Profile</h2>
+          {message && <Message variant="danger">{message}</Message>}
+          {/* {error && <Message variant="danger">{error}</Message>} */}
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId="name" className="my-2">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="name"
+                placeholder="Enter Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Form.Group controlId="email" className="my-2">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="password" className="my-2">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              autoComplete="on"
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="passwordConfirm" className="my-2">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              autoComplete="on"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Button type="submit" variant="primary" className="my-2">
-            Update
-          </Button>
-        </Form>
-      </Col>
+            <Form.Group controlId="email" className="my-2">
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="password" className="my-2">
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                autoComplete="on"
+                onChange={(e) => setPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="passwordConfirm" className="my-2">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm password"
+                value={confirmPassword}
+                autoComplete="on"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Button type="submit" variant="primary" className="my-2">
+              Update
+            </Button>
+          </Form>
+        </Col>
 
-      <Col md={9}>
-        <h2>My Orders</h2>
-        {loadingOrders ? (
-          <Loader />
-        ) : errorOrders ? (
-          <Message variant="danger">{error}</Message>
-        ) : (
-          <Table striped responsive className="table-sm">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Paid</th>
-                <th>Delivered</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>${order.totalPrice}</td>
-                  <td>
-                    $
-                    {order.isPaid ? (
-                      order.paidAt.substring(0, 10)
-                    ) : (
-                      <i className="fas fa-times" style={{ color: "red" }}></i>
-                    )}
-                  </td>
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button className="btn-sm">Details</Button>
-                    </LinkContainer>
-                  </td>
+        <Col md={9}>
+          <h2>My Orders</h2>
+          {loadingOrders ? (
+            <Loader />
+          ) : errorOrders ? (
+            <Message variant="danger">{error}</Message>
+          ) : (
+            <Table striped responsive className="table-sm">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Paid</th>
+                  <th>Delivered</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
-      </Col>
-    </Row>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order._id}>
+                    <td>{order._id}</td>
+                    <td>{order.createdAt.substring(0, 10)}</td>
+                    <td>${order.totalPrice}</td>
+                    <td>
+                      $
+                      {order.isPaid ? (
+                        order.paidAt.substring(0, 10)
+                      ) : (
+                        <i
+                          className="fas fa-times"
+                          style={{ color: "red" }}
+                        ></i>
+                      )}
+                    </td>
+                    <td>
+                      <LinkContainer to={`/order/${order._id}`}>
+                        <Button className="btn-sm">Details</Button>
+                      </LinkContainer>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </Col>
+      </Row>{" "}
+    </React.Fragment>
   );
 }
 

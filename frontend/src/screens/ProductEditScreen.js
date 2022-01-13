@@ -15,15 +15,6 @@ function ProductEditScreen() {
   const match = useMatch("/admin/product/:id/edit");
   const productId = match.params.id;
 
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [image, setImage] = useState("");
-  const [brand, setBrand] = useState("");
-  const [category, setCategory] = useState("");
-  const [countInStock, setCountInStock] = useState(0);
-  const [description, setDescription] = useState("");
-  const [uploading, setUploading] = useState("");
-
   const productDetails = useSelector((state) => state.productDetails);
   const { product, error, loading } = productDetails;
 
@@ -33,6 +24,15 @@ function ProductEditScreen() {
     loading: loadingUpdate,
     success: successUpdate,
   } = productUpdate;
+
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [image, setImage] = useState("");
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+  const [countInStock, setCountInStock] = useState(0);
+  const [description, setDescription] = useState("");
+  const [uploading, setUploading] = useState("");
 
   useEffect(() => {
     if (successUpdate) {
@@ -97,7 +97,7 @@ function ProductEditScreen() {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <Link to="/admin/productlist">Go Back</Link>
       <FormContainer>
         <h1>Edit Product</h1>
@@ -194,7 +194,7 @@ function ProductEditScreen() {
           </Form>
         )}
       </FormContainer>
-    </div>
+    </React.Fragment>
   );
 }
 

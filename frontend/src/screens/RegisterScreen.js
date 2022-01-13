@@ -8,14 +8,16 @@ import { register } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
 
 function RegisterScreen() {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userRegister = useSelector((state) => state.userRegister);
-  const { userInfo, error, loading } = userRegister;
+
+  const [searchParams] = useSearchParams();
   const redirect = searchParams.get("search")
     ? searchParams.get("search")
     : null;
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, error, loading } = userRegister;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,70 +41,72 @@ function RegisterScreen() {
   };
 
   return (
-    <FormContainer>
-      {loading && <Loader />}
+    <React.Fragment>
+      <FormContainer>
+        {loading && <Loader />}
 
-      <h1>Sign In</h1>
-      {message && <Message variant="danger">{message}</Message>}
-      {error && <Message variant="danger">{error}</Message>}
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="name" className="my-2">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            required
-            type="name"
-            placeholder="Enter Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+        <h1>Sign In</h1>
+        {message && <Message variant="danger">{message}</Message>}
+        {error && <Message variant="danger">{error}</Message>}
+        <Form onSubmit={submitHandler}>
+          <Form.Group controlId="name" className="my-2">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              required
+              type="name"
+              placeholder="Enter Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId="email" className="my-2">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            required
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId="password" className="my-2">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            required
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            autoComplete="on"
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId="passwordConfirm" className="my-2">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            required
-            type="password"
-            placeholder="Confirm password"
-            value={confirmPassword}
-            autoComplete="on"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Button type="submit" variant="primary" className="my-2">
-          Sign up
-        </Button>
-      </Form>
+          <Form.Group controlId="email" className="my-2">
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
+              required
+              type="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="password" className="my-2">
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
+              required
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              autoComplete="on"
+              onChange={(e) => setPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="passwordConfirm" className="my-2">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              required
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              autoComplete="on"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+          <Button type="submit" variant="primary" className="my-2">
+            Sign up
+          </Button>
+        </Form>
 
-      <Row className="py-3">
-        <Col>
-          Have an Account?{" "}
-          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            Sign in here
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+        <Row className="py-3">
+          <Col>
+            Have an Account?{" "}
+            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+              Sign in here
+            </Link>
+          </Col>
+        </Row>
+      </FormContainer>
+    </React.Fragment>
   );
 }
 

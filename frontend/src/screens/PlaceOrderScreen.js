@@ -11,6 +11,7 @@ import Loader from "../components/Loader";
 function PlaceOrderScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, error, loading, success } = orderCreate;
@@ -50,7 +51,7 @@ function PlaceOrderScreen() {
   };
 
   return (
-    <div>
+    <React.Fragment>
       {loading && <Loader />}
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
@@ -162,7 +163,7 @@ function PlaceOrderScreen() {
           </Card>
         </Col>
       </Row>
-    </div>
+    </React.Fragment>
   );
 }
 

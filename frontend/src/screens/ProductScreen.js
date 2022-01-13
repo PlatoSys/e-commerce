@@ -23,8 +23,8 @@ import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 function ProductScreen() {
   const navigate = useNavigate();
-  const match = useMatch("/products/:id");
   const dispatch = useDispatch();
+  const match = useMatch("/products/:id");
 
   const productDetails = useSelector((state) => state.productDetails);
   const { error, loading, product } = productDetails;

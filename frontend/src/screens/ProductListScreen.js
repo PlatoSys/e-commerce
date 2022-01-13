@@ -61,7 +61,7 @@ function ProductListScreen() {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <Row className="align-items-center">
         <Col>
           <h1>Products</h1>
@@ -130,7 +130,7 @@ function ProductListScreen() {
           <Paginate pages={pages} page={page} isAdmin={true} />
         </div>
       )}
-    </div>
+    </React.Fragment>
   );
 }
 

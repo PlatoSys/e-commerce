@@ -8,13 +8,14 @@ import { deleteUser, listUsers } from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
 
 function UserListScreen() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
   const { userInfo } = useSelector((state) => state.userLogin);
   const userDelete = useSelector((state) => state.userDelete);
   const { success: successDelete } = userDelete;
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -31,7 +32,7 @@ function UserListScreen() {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <h1>Users</h1>
       {loading ? (
         <Loader />
@@ -81,7 +82,7 @@ function UserListScreen() {
           </tbody>
         </Table>
       )}
-    </div>
+    </React.Fragment>
   );
 }
 

@@ -86,11 +86,15 @@ function OrderScreen() {
     dispatch(deliverOrder(order));
   };
   return loading ? (
-    <Loader />
+    <React.Fragment>
+      <Loader />
+    </React.Fragment>
   ) : error ? (
-    <Message variant="danger">{error}</Message>
+    <React.Fragment>
+      <Message variant="danger">{error}</Message>
+    </React.Fragment>
   ) : (
-    <div>
+    <React.Fragment>
       <h1>Order: {order._id}</h1>
       <Row>
         <Col md={8}>
@@ -117,7 +121,9 @@ function OrderScreen() {
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message variant="success">Delivered on {order.deliveredAt.substring(0, 10)}</Message>
+                <Message variant="success">
+                  Delivered on {order.deliveredAt.substring(0, 10)}
+                </Message>
               ) : (
                 <Message variant="warning">Not Delivered</Message>
               )}
@@ -240,7 +246,7 @@ function OrderScreen() {
           </Card>
         </Col>
       </Row>
-    </div>
+    </React.Fragment>
   );
 }
 

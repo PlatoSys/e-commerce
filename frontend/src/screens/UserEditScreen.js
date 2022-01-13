@@ -14,10 +14,6 @@ function UserEditScreen() {
   const match = useMatch("/admin/user/:id/edit");
   const userId = match.params.id;
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-
   const userDetails = useSelector((state) => state.userDetails);
   const { user, error, loading } = userDetails;
   const userUpdate = useSelector((state) => state.userUpdate);
@@ -26,6 +22,10 @@ function UserEditScreen() {
     loading: loadingUpdate,
     success: SuccessUpdate,
   } = userUpdate;
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (SuccessUpdate) {
@@ -48,7 +48,7 @@ function UserEditScreen() {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <Link to="/admin/userlist">Go Back</Link>
       <FormContainer>
         <h1>Edit User</h1>
@@ -94,7 +94,7 @@ function UserEditScreen() {
           </Form>
         )}
       </FormContainer>
-    </div>
+    </React.Fragment>
   );
 }
 
