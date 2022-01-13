@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 import environ
 import os
@@ -36,7 +37,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -52,9 +53,6 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
-
-
-from datetime import timedelta
 
 
 SIMPLE_JWT = {
@@ -127,22 +125,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "d8tlaae3f37ien",
-        'USER': "yucreyiclkdoqg",
-        'PASSWORD': os.environ.get("DB_PASSWORD"),
-        'HOST': "ec2-34-239-196-254.compute-1.amazonaws.com",
-        'PORT': '5432',
-        'DATABASE_URL': "postgres://yucreyiclkdoqg:aa14cddcf4219edde50a9d26ce5187a6500555e90358b7d86c1d0fdf36684d4f@ec2-34-239-196-254.compute-1.amazonaws.com:5432/d8tlaae3f37ien"
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': "d8tlaae3f37ien",
+        # 'USER': "yucreyiclkdoqg",
+        # 'PASSWORD': os.environ.get("DB_PASSWORD"),
+        # 'HOST': "ec2-34-239-196-254.compute-1.amazonaws.com",
+        # 'PORT': '5432',
+        # 'DATABASE_URL': "postgres://yucreyiclkdoqg:aa14cddcf4219edde50a9d26ce5187a6500555e90358b7d86c1d0fdf36684d4f@ec2-34-239-196-254.compute-1.amazonaws.com:5432/d8tlaae3f37ien"
 
         # ==========================================
 
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'proshop',
-        # 'USER': 'postgres',
-        # 'PASSWORD': env("DB_PASSWORD"),
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get("DB_NAME"),
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
+        'DATABASE_URL': os.environ.get("DB_URI")
     }
 }
 
