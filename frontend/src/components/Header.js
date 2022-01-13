@@ -4,7 +4,6 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 import SearchBox from "./SearchBox";
-import Loader from "./Loader";
 
 function Header() {
   const userLogin = useSelector((state) => state.userLogin);

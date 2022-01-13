@@ -28,11 +28,6 @@ function ProductCarousel() {
             <Image
               src={product.image}
               alt={product.name}
-              maxWidth={"150px"}
-              minWidth={"150px"}
-              minHeight={"150px"}
-              maxHeight={"150px"}
-              alt={product.name}
               fluid
             />
             <Carousel.Caption className="carousel.caption">

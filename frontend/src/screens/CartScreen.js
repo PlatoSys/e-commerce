@@ -12,7 +12,6 @@ import {
 } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
-import Loader from "../components/Loader";
 
 function CartScreen() {
   const dispatch = useDispatch();
