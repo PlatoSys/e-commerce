@@ -3,17 +3,12 @@ python:
   - "3.9"
 
 env:
-  global:
-  - PGUSER=postgres
-  - DJANGO=4.0 DB=postgresql
+  - DJANGO=3.2.7 DB=postgresql
 services:
   - postgresql
-
 install:
   - pip install -r requirements.txt
-
 # before_script: 
 #   - psql -c 'create database travis_ci_test;' -U postgres
-
 script: 
   - python manage.py test
