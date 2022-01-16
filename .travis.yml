@@ -3,9 +3,12 @@ python:
   - "3.9"
 
 services:
-  - docker
+  - postgresql
 
-before_script: pip install docker-compose
+env:
+  -DJANGO=4.0 DB=postgresql
+
+before_script: postgresql -e 'create database proshop;' -u root
 
 script: 
-  - docker-compose run app sh -c "python manage.py test && flake8"
+  - python manage.py test && flake8
