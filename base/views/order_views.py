@@ -7,6 +7,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from datetime import datetime
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def addOrderItems(request):
@@ -16,7 +17,8 @@ def addOrderItems(request):
     orderItems = data['orderItems']
 
     if orderItems and len(orderItems) == 0:
-        return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'detail': 'No Order Items'},
+                        status=status.HTTP_400_BAD_REQUEST)
     else:
         order = Order.objects.create(
             user=user,
@@ -53,6 +55,7 @@ def addOrderItems(request):
         serializer = OrderSerializer(order, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getOrderById(request, pk):
@@ -68,6 +71,7 @@ def getOrderById(request, pk):
         return Response(serializer.data)
     return Response({'detail': 'Not Authorized to view this order'},
         status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
@@ -103,6 +107,7 @@ def updateOrderToDelivered(request, pk):
     order.save()
     return Response('Order was Delivered')
 
+
 @permission_classes([IsAuthenticated])
 class OrderDetail(APIView):
     """
@@ -121,7 +126,8 @@ class OrderDetail(APIView):
         order.isPaid = True
         order.paidAt = datetime.now()
         order.save()
-        return Response({'detail': 'Order was Paid'}, status=status.HTTP_200_OK)
+        return Response({'detail': 'Order was Paid'},
+                        status=status.HTTP_200_OK)
 
 
     def post(self, request, pk, format=None):
@@ -131,7 +137,8 @@ class OrderDetail(APIView):
         orderItems = data['orderItems']
 
         if orderItems and len(orderItems) == 0:
-            return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': 'No Order Items'},
+                            status=status.HTTP_400_BAD_REQUEST)
         else:
             order = Order.objects.create(
                 user=user,

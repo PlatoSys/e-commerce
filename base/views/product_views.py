@@ -28,7 +28,8 @@ def getProducts(request):
     page = 1 if page is None else int(page)
 
     serializer = ProductSerializer(products, many=True)
-    return Response({'products': serializer.data, 'page': page, "pages": paginator.num_pages}, status=status.HTTP_200_OK)
+    return Response({'products': serializer.data, 'page': page,
+                    "pages": paginator.num_pages}, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def getTopProducts(request):
@@ -64,10 +65,12 @@ def createProductReview(request, pk):
 
     alreadyExists = product.review_set.filter(user=user).exists()
     if alreadyExists:
-        return Response({'detail': 'Review Already Exists'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'detail': 'Review Already Exists'},
+                        status=status.HTTP_400_BAD_REQUEST)
 
     elif data['rating'] == 0:
-        return Response({'detail': 'Please select a rating'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'detail': 'Please select a rating'},
+                        status=status.HTTP_400_BAD_REQUEST)
     else:
         review = Review.objects.create(
             user=user,
@@ -119,7 +122,8 @@ class AdminProductDetail(APIView):
     def delete(self, request, pk, format=None):
         product = Product.objects.get(_id=pk)
         product.delete()
-        return Response({'detail': 'product was deleted'}, status=status.HTTP_200_OK)
+        return Response({'detail': 'product was deleted'},
+                        status=status.HTTP_200_OK)
 
     
     def post(self, request, pk):
