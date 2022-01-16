@@ -8,7 +8,7 @@ services:
 env:
   -DJANGO=4.0 DB=postgresql
 
-before_script: psql -e "CREATE DATABASE proshop WITH ENCODING 'UTF8' LC_COLLATE='English_United States' LC_CTYPE='English_United States';"
+before_script: "createdb proshop"
 
 script: 
   - python manage.py test && flake8
