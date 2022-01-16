@@ -13,7 +13,7 @@ from datetime import datetime
 def addOrderItems(request):
     user = request.user
     data = request.data
-    
+
     orderItems = data['orderItems']
 
     if orderItems and len(orderItems) == 0:
@@ -64,13 +64,13 @@ def getOrderById(request, pk):
 
     if not order:
         return Response({'detail': 'Order doesnt exists'},
-            status=status.HTTP_400_BAD_REQUEST)
+                        status=status.HTTP_400_BAD_REQUEST)
 
     if user.is_staff or order.user == user:
         serializer = OrderSerializer(order, many=False)
         return Response(serializer.data)
     return Response({'detail': 'Not Authorized to view this order'},
-        status=status.HTTP_400_BAD_REQUEST)
+                    status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])
@@ -83,6 +83,7 @@ def updateOrderToPaid(request, pk):
     order.save()
     return Response({'detail': 'Order was Paid'}, status=status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getMyOrders(request):
@@ -91,12 +92,14 @@ def getMyOrders(request):
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getOrders(request):
     orders = Order.objects.all()
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
@@ -129,11 +132,10 @@ class OrderDetail(APIView):
         return Response({'detail': 'Order was Paid'},
                         status=status.HTTP_200_OK)
 
-
     def post(self, request, pk, format=None):
         user = request.user
         data = request.data
-        
+
         orderItems = data['orderItems']
 
         if orderItems and len(orderItems) == 0:
@@ -174,17 +176,17 @@ class OrderDetail(APIView):
 
             serializer = OrderSerializer(order, many=False)
             return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
     def get(self, request, pk):
         user = request.user
         order = Order.objects.get(_id=pk)
 
         if not order:
             return Response({'detail': 'Order doesnt exists'},
-                status=status.HTTP_400_BAD_REQUEST)
+                            status=status.HTTP_400_BAD_REQUEST)
 
         if user.is_staff or order.user == user:
             serializer = OrderSerializer(order, many=False)
             return Response(serializer.data)
         return Response({'detail': 'Not Authorized to view this order'},
-            status=status.HTTP_400_BAD_REQUEST)
+                        status=status.HTTP_400_BAD_REQUEST)
