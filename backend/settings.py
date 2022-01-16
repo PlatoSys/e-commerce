@@ -131,7 +131,16 @@ DATABASES = {
         'PASSWORD': os.environ.get("DB_PASSWORD"),
         'HOST': os.environ.get("DB_HOST"),
         'PORT': os.environ.get("DB_PORT"),
-        'DATABASE_URL': os.environ.get("DB_URI")
+        'DATABASE_URL': os.environ.get("DB_URI"),
+        'TEST': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get("DB_NAME"),
+            'USER': os.environ.get("DB_USER"),
+            'PASSWORD': os.environ.get("DB_PASSWORD"),
+            'HOST': os.environ.get("DB_HOST"),
+            'PORT': os.environ.get("DB_PORT"),
+            'DATABASE_URL': os.environ.get("DB_URI"),
+            }
     }
 }
 
