@@ -6,5 +6,4 @@ class BaseConfig(AppConfig):
     name = 'base'
 
     def ready(self):
-        # import base.signals  # noqa: F401
-        import base.signals
+        import base.signals  # noqa: F401
