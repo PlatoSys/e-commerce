@@ -6,8 +6,6 @@ env:
 services:
   - postgresql
 install:
-  - pip install -q Django==3.1.7
-  - pip install django-environ
-  - pip install flake8
+  - pip install -r travis_requiremets.txt
 script: 
-  - python manage.py test
+  - python manage.py test && flake8
