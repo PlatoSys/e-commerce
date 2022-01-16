@@ -16,7 +16,6 @@ import environ
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print('+=================================================')
 env = environ.Env()
 environ.Env.read_env()
 
@@ -133,13 +132,10 @@ DATABASES = {
         'PORT': os.environ.get("DB_PORT"),
         'DATABASE_URL': os.environ.get("DB_URI"),
         'TEST': {
-            'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'travis_ci_test',
-            'USER': 'postgres',
-            }
+        }
     }
 }
-print()
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

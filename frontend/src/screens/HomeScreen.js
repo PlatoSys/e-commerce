@@ -25,7 +25,7 @@ function HomeScreen() {
     <React.Suspense fallback={<Loader />}>
       <React.Fragment>
         {!keyword && <ProductCarousel />}
-        <h1>Latest Products</h1>
+        <h1>Latest Products (Travis)</h1>
         {loading ? (
           <Loader />
         ) : error ? (
