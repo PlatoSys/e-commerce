@@ -13,6 +13,6 @@ install:
   - pip install -r requirements.txt
 
 before_script: 
-    - psql -c 'create database proshop;' -U postgres
+    - psql -c 'create database test_db;'
 script: 
   - python manage.py test
