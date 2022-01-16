@@ -3,9 +3,7 @@ python:
   - "3.9"
 
 env:
-  - SECRET_KEY="TEST"
-  # - DJANGO=4.0 DB=postgresql
-  # - DJANGO_SETTINGS_MODULE="backend.settings"
+  - DJANGO=4.0 DB=postgresql
 services:
   - postgresql
 
