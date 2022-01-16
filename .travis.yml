@@ -10,7 +10,7 @@ services:
 install:
   - pip install -r requirements.txt
 
-# before_script: 
-#     - psql -c 'create database travis_db_testing;'
+before_script: 
+    - psql -c 'create database travis_db_testing;'
 script: 
   - python manage.py test
