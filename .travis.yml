@@ -4,4 +4,4 @@ python:
 
 
 script: 
-  - python manage.py test && flake8
+  - python backend/manage.py test && flake8
