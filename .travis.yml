@@ -3,7 +3,7 @@ python:
   - "3.9"
 
 env:
-  - DJANGO=3.2.7 DB=postgresql
+  - DJANGO=3.1.7 DB=postgresql
 services:
   - postgresql
 install:
