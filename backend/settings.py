@@ -134,7 +134,7 @@ DATABASES = {
         'DATABASE_URL': os.environ.get("DB_URI"),
         'TEST': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'test_db',
+            'NAME': 'travis_db_testing',
             # 'USER': 'postgres',
             # 'HOST': 'localhost',
             # 'PORT': '5432',
