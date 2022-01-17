@@ -1,3 +1,4 @@
+from xml.dom import InvalidAccessErr
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Order, OrderItem, Product, Review, ShippingAddress
@@ -85,7 +86,7 @@ class OrderSerializer(serializers.ModelSerializer):
         try:
             address = shippingAddressSerializer(obj.shippingaddress,
                                                 many=False).data
-        except:
+        except InvalidAccessErr:
             address = False
         return address
 
