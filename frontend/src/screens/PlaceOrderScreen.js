@@ -34,7 +34,7 @@ function PlaceOrderScreen() {
         type: ORDER_CREATE_RESET,
       });
     }
-  }, [success, navigate, dispatch]);
+  }, [success, navigate, dispatch, order]);
 
   const placeOrder = () => {
     dispatch(

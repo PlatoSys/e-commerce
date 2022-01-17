@@ -24,22 +24,23 @@ function HomeScreen() {
   return (
     <React.Suspense fallback={<Loader />}>
       <React.Fragment>
-      {!keyword && <ProductCarousel />}
-      <h1>Latest Products</h1>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <div>
-          <Row lg={"2px"}>
-            {products.map((product) => (
-              <Product key={product._id} product={product} />
-            ))}
-          </Row>
-          <Paginate page={page} pages={pages} keyword={keyword} />
-        </div>
-      )}</React.Fragment>
+        {!keyword && <ProductCarousel />}
+        <h1>Latest Products</h1>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <div>
+            <Row lg={"2px"}>
+              {products.map((product) => (
+                <Product key={product._id} product={product} />
+              ))}
+            </Row>
+            <Paginate page={page} pages={pages} keyword={keyword} />
+          </div>
+        )}
+      </React.Fragment>
     </React.Suspense>
   );
 }

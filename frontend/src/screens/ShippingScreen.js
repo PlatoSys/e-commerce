@@ -5,7 +5,6 @@ import FormContainer from "../components/FormContainer";
 import { saveShippingAddress } from "../actions/cartActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
 
 function ShippingScreen() {
   const navigate = useNavigate();
