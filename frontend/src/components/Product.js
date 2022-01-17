@@ -10,7 +10,12 @@ function Product({ product }) {
       <Card className="my-3 p-3 rounded">
         Product
         <Link to={`/products/${product._id}`}>
-          <Card.Img src={product.image} alt={product.name} height={"auto"} width={"auto"} />
+          <Card.Img
+            src={product.image}
+            alt={product.name}
+            height={"auto"}
+            width={"auto"}
+          />
         </Link>
         <Card.Body>
           <Link to={`/products/${product._id}`}>
@@ -29,7 +34,9 @@ function Product({ product }) {
             </div>
           </Card.Text>
 
-          <Card.Text as="h2" style={{padding: "1rem"}}>${product.price}</Card.Text>
+          <Card.Text as="h2" style={{ padding: "1rem" }}>
+            ${product.price}
+          </Card.Text>
         </Card.Body>
       </Card>
     </Col>

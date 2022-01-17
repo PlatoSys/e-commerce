@@ -76,7 +76,15 @@ function OrderScreen() {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, successPay, successDelivered, navigate, userInfo]);
+  }, [
+    dispatch,
+    order,
+    orderId,
+    successPay,
+    successDelivered,
+    navigate,
+    userInfo,
+  ]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -220,10 +228,11 @@ function OrderScreen() {
                   {!sdkReady ? (
                     <Loader />
                   ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
+                    // <PayPalButton
+                    //   amount={order.totalPrice}
+                    //   onSuccess={successPaymentHandler}
+                    // />
+                    <Button className="btn w-100">Paypal (Disabled)</Button>
                   )}
                 </ListGroup.Item>
               )}
