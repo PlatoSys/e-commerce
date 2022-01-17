@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.9"
+env:
+  - SECRET_KEY="TEST"
+services:
+  - postgresql
+install:
+  - pip install -r travis_requirements.txt
+script: 
+  - python manage.py test && flake8
