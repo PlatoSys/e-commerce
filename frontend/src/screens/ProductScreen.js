@@ -78,7 +78,7 @@ function ProductScreen() {
         <div>
           <Row>
             <Col md={6}>
-              <Image className="lazyload"  src={product.image} alt={product.name} fluid />
+              <Image loading="lazy"  src={product.image} alt={product.name} fluid />
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">

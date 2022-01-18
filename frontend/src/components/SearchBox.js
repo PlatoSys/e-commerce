@@ -19,16 +19,17 @@ function SearchBox() {
 
   return (
     <Form onSubmit={submitHandler} className="d-flex">
-      <Form.Label htmlFor="query-search"></Form.Label>
       <Form.Control
         type="text"
         name="q"
         id="query-search"
         onChange={(e) => setKeyword(e.target.value)}
       ></Form.Control>
-      <Button type="submit" variant="outline-success" className="p-2 mx-2">
-        Search
-      </Button>
+      <Form.Label className={"mb-0"} htmlFor="query-search">
+        <Button  type="submit" style={{height: "100%"}} variant="outline-success" className="p-2 mx-2">
+          Search
+        </Button>
+      </Form.Label>
     </Form>
   );
 }

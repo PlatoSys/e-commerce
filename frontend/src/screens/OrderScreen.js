@@ -175,7 +175,7 @@ function OrderScreen() {
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
-                          <Image className="lazyload" 
+                          <Image loading="lazy" 
                             src={item.image}
                             alt={item.name}
                             fluid
