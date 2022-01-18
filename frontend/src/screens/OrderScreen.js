@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -10,12 +10,13 @@ import {
   deliverOrder,
 } from "../actions/orderActions";
 import { useMatch } from "react-router-dom";
-import { PayPalButton } from "react-paypal-button-v2";
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
 import { useNavigate } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
+import InvoicePDF from "../components/InvoicePDF";
 
 function OrderScreen() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function OrderScreen() {
   const { userInfo } = userLogin;
 
   const [sdkReady, setSdkReady] = useState(false);
+  const pdf_ref = useRef();
 
   if (!loading && !error) {
     order.itemsPrice = order.orderItems
@@ -54,6 +56,16 @@ function OrderScreen() {
     };
     document.body.appendChild(script);
   };
+
+    const ExportAsPDF = useReactToPrint({
+      content: () => pdf_ref.current,
+    });
+
+    const exportHandler = () => {
+      pdf_ref.current.hidden = false
+      ExportAsPDF();
+      pdf_ref.current.hidden = true
+    }
 
   useEffect(() => {
     if (!userInfo) {
@@ -87,6 +99,7 @@ function OrderScreen() {
   ]);
 
   const successPaymentHandler = (paymentResult) => {
+    dispatch(payOrder(orderId, true));
     dispatch(payOrder(orderId, paymentResult));
   };
 
@@ -232,7 +245,12 @@ function OrderScreen() {
                     //   amount={order.totalPrice}
                     //   onSuccess={successPaymentHandler}
                     // />
-                    <Button className="btn w-100">Paypal (Disabled)</Button>
+                    <Button
+                      onClick={successPaymentHandler}
+                      className="btn w-100"
+                    >
+                      Paypal (Disabled)
+                    </Button>
                   )}
                 </ListGroup.Item>
               )}
@@ -252,6 +270,14 @@ function OrderScreen() {
                   </Button>
                 </ListGroup.Item>
               )}
+            {order.isPaid && (
+              <ListGroup.Item>
+                <InvoicePDF ref={pdf_ref} hidden={true} />
+                <Button className="btn w-100" onClick={exportHandler}>
+                  Invoice
+                </Button>
+              </ListGroup.Item>
+            )}
           </Card>
         </Col>
       </Row>

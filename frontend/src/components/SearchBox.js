@@ -19,7 +19,7 @@ function SearchBox() {
 
   return (
     <Form onSubmit={submitHandler} className="d-flex">
-      <Form.Label htmlfor="query-search"></Form.Label>
+      <Form.Label htmlFor="query-search"></Form.Label>
       <Form.Control
         type="text"
         name="q"
