@@ -15,6 +15,8 @@ function PlaceOrderScreen() {
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, error, loading, success } = orderCreate;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   cart.itemsPrice = cart.cartItems
     .reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -37,17 +39,21 @@ function PlaceOrderScreen() {
   }, [success, navigate, dispatch, order]);
 
   const placeOrder = () => {
-    dispatch(
-      createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingPrice,
-        taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
-      })
-    );
+    if (userInfo) {
+      dispatch(
+        createOrder({
+          orderItems: cart.cartItems,
+          shippingAddress: cart.shippingAddress,
+          paymentMethod: cart.paymentMethod,
+          itemsPrice: cart.itemsPrice,
+          shippingPrice: cart.shippingPrice,
+          taxPrice: cart.taxPrice,
+          totalPrice: cart.totalPrice,
+        })
+      );
+    } else {
+      navigate("/login/");
+    }
   };
 
   return (
@@ -85,7 +91,8 @@ function PlaceOrderScreen() {
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
-                          <Image loading="lazy" 
+                          <Image
+                            loading="lazy"
                             src={item.image}
                             alt={item.name}
                             fluid
