@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1', 'localhost', 'app-proshop-update.herokuapp.com'
+    '127.0.0.1', 'localhost', 'app-proshop-update.herokuapp.com', 'backend'
 ]
 
 
@@ -130,10 +130,10 @@ DATABASES = {
         'PASSWORD': os.environ.get("DB_PASSWORD"),
         'HOST': os.environ.get("DB_HOST"),
         'PORT': os.environ.get("DB_PORT"),
-        'DATABASE_URL': os.environ.get("DB_URI"),
-        'TEST': {
-            'NAME': 'travis_ci_test',
-        }
+        # 'DATABASE_URL': os.environ.get("DB_URI"),
+        # 'TEST': {
+        #     'NAME': 'travis_ci_test',
+        # }
     }
 }
 # Password validation
